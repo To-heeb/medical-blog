@@ -15,10 +15,11 @@ use App\Http\Controllers\Api\V1\AuthController;
 |
 */
 
-Route::namespace('Api')->prefix('/V1')->group(function () {
-
-    Route::post('login', [AuthController::class, 'login'])
-        ->name('api.login');
+Route::group([
+    'prefix' => '/v1',
+    'namespace' => 'Api\V1',
+    'as' => 'api.'
+], function () {
 });
 
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
