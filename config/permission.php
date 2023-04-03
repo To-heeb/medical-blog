@@ -158,4 +158,253 @@ return [
 
         'store' => 'default',
     ],
+
+    /*
+    *
+    * All Permissions
+    *
+    */
+
+    'permissions' => [
+
+        // Users
+        'view users' => [
+            'display_name' => 'View users',
+            'description'  => 'Can view users',
+            'group'        => 'User',
+        ],
+
+        'create users' => [
+            'display_name' => 'Create users',
+            'description'  => 'Can create users',
+            'group'        => 'User',
+        ],
+
+        'edit users' => [
+            'display_name' => 'Edit users',
+            'description'  => 'Can edit users',
+            'group'        => 'User',
+        ],
+
+        'delete users' => [
+            'display_name' => 'Delete users',
+            'description'  => 'Can delete users',
+            'group'        => 'User',
+        ],
+
+        // Roles
+        'view roles' => [
+            'display_name' => 'View roles',
+            'description'  => 'Can view roles',
+            'group'        => 'Role',
+        ],
+
+        'create roles' => [
+            'display_name' => 'Create roles',
+            'description'  => 'Can create roles',
+            'group'        => 'Role',
+        ],
+
+        'edit roles' => [
+            'display_name' => 'Edit roles',
+            'description'  => 'Can edit roles',
+            'group'        => 'Role',
+        ],
+
+        'delete roles' => [
+            'display_name' => 'Delete roles',
+            'description'  => 'Can delete roles',
+            'group'        => 'Role',
+        ],
+
+        // Permissions
+        'view permissions' => [
+            'display_name' => 'View permissions',
+            'description'  => 'Can view permissions',
+            'group'        => 'Permission',
+        ],
+
+        'create permissions' => [
+            'display_name' => 'Create permissions',
+            'description'  => 'Can create permissions',
+            'group'        => 'Permission',
+        ],
+
+        'edit permissions' => [
+            'display_name' => 'Edit permissions',
+            'description'  => 'Can edit permissions',
+            'group'        => 'Permission',
+        ],
+
+        'delete permissions' => [
+            'display_name' => 'Delete permissions',
+            'description'  => 'Can delete permissions',
+            'group'        => 'Permission',
+        ],
+
+        // Answers
+        'manage answers' => [
+            'display_name' => 'Manage all answers',
+            'description'  => 'Can manage all answers',
+            'group'        => 'Answer',
+        ],
+
+        'view answers' => [
+            'display_name' => 'View answers',
+            'description'  => 'Can view answers',
+            'group'        => 'Answer',
+        ],
+
+        'create answers' => [
+            'display_name' => 'Create answers',
+            'description'  => 'Can create answers',
+            'group'        => 'Answer',
+        ],
+
+        'edit answers' => [
+            'display_name' => 'Edit answers',
+            'description'  => 'Can edit answers',
+            'group'        => 'Answer',
+        ],
+
+        'delete answers' => [
+            'display_name' => 'Delete answers',
+            'description'  => 'Can delete answers',
+            'group'        => 'Answer',
+        ],
+
+        // Post
+        'view posts' => [
+            'display_name' => 'View posts',
+            'description'  => 'Can view posts',
+            'group'        => 'Post',
+        ],
+
+        'create posts' => [
+            'display_name' => 'Create posts',
+            'description'  => 'Can create posts',
+            'group'        => 'Post',
+        ],
+
+        'edit posts' => [
+            'display_name' => 'Edit posts',
+            'description'  => 'Can edit posts',
+            'group'        => 'Post',
+        ],
+
+        'delete posts' => [
+            'display_name' => 'Delete posts',
+            'description'  => 'Can delete posts',
+            'group'        => 'Post',
+        ],
+
+        // Questions
+        'view questions' => [
+            'display_name' => 'View questions',
+            'description'  => 'Can view questions',
+            'group'        => 'Question',
+        ],
+
+        'create questions' => [
+            'display_name' => 'Create questions',
+            'description'  => 'Can create questions',
+            'group'        => 'Question',
+        ],
+
+        'edit questions' => [
+            'display_name' => 'Edit questions',
+            'description'  => 'Can edit questions',
+            'group'        => 'Question',
+        ],
+
+        'delete questions' => [
+            'display_name' => 'Delete questions',
+            'description'  => 'Can delete questions',
+            'group'        => 'Question',
+        ],
+
+
+        // Comments
+        'view comments' => [
+            'display_name' => 'View comments',
+            'description'  => 'Can view comments',
+            'group'        => 'Comment',
+        ],
+
+        'create comments' => [
+            'display_name' => 'Create comments',
+            'description'  => 'Can create comments',
+            'group'        => 'Comment',
+        ],
+
+        'edit comments' => [
+            'display_name' => 'Edit comments',
+            'description'  => 'Can edit comments',
+            'group'        => 'Comment',
+        ],
+
+        'delete comments' => [
+            'display_name' => 'Delete comments',
+            'description'  => 'Can delete comments',
+            'group'        => 'Comment',
+        ],
+
+        // Tags
+        'view tags' => [
+            'display_name' => 'View tags',
+            'description'  => 'Can view tags',
+            'group'        => 'Tag',
+        ],
+
+        'create tags' => [
+            'display_name' => 'Create tags',
+            'description'  => 'Can create tags',
+            'group'        => 'Tag',
+        ],
+
+        'edit tags' => [
+            'display_name' => 'Edit tags',
+            'description'  => 'Can edit tags',
+            'group'        => 'Tag',
+        ],
+
+        'delete tags' => [
+            'display_name' => 'Delete tags',
+            'description'  => 'Can delete tags',
+            'group'        => 'Tag',
+        ],
+
+        // Categories
+        'view categories' => [
+            'display_name' => 'View categories',
+            'description'  => 'Can view categories',
+            'group'        => 'Category',
+        ],
+
+        'create categories' => [
+            'display_name' => 'Create categories',
+            'description'  => 'Can create categories',
+            'group'        => 'Category',
+        ],
+
+        'edit categories' => [
+            'display_name' => 'Edit categories',
+            'description'  => 'Can edit categories',
+            'group'        => 'Category',
+        ],
+
+        'delete categories' => [
+            'display_name' => 'Delete categories',
+            'description'  => 'Can delete categories',
+            'group'        => 'Category',
+        ],
+
+
+        // Logs
+        'manage logs' => [
+            'display_name' => 'Manage logs',
+            'description'  => 'Can manage logs',
+            'group'        => 'Logs',
+        ],
+    ],
 ];

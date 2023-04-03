@@ -13,9 +13,46 @@ class RoleSeeder extends Seeder
      */
     public function run(): void
     {
-        Role::create(['name' => 'super-admin']);
-        Role::create(['name' => 'admin']);
-        Role::create(['name' => 'super-user']);
-        Role::create(['name' => 'user']);
+        $super_admin = Role::create(['name' => 'super-admin']);
+        $admin = Role::create(['name' => 'admin']);
+        $super_user = Role::create(['name' => 'super-user']);
+        $user = Role::create(['name' => 'user']);
+
+        $permissions = collect(config('permission.permissions'))->keys();
+        $super_admin->syncPermissions($permissions);
+
+        $admin->syncPermissions($permissions->filter(
+            fn ($permission) => !str($permission)->contains(
+                [
+                    'roles',
+                    'permissions',
+                    'tags',
+                    'answers',
+                    'logs'
+                ]
+            )
+        )->toArray());
+
+        $super_user->syncPermissions($permissions->filter(
+            fn ($permission) => !str($permission)->contains(
+                [
+                    'roles',
+                    'permissions',
+                    'logs'
+                ]
+            )
+        )->toArray());
+
+        $user->syncPermissions($permissions->filter(
+            fn ($permission) => !str($permission)->contains(
+                [
+                    'roles',
+                    'permissions',
+                    'tags',
+                    'answers',
+                    'logs'
+                ]
+            )
+        )->toArray());
     }
 }
