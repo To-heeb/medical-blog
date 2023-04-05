@@ -13,7 +13,7 @@ class QuestionPolicy
      */
     public function viewAny(User $user): bool
     {
-        //
+        return $user->hasAnyPermission(['handle questions', 'view questions']);
     }
 
     /**
@@ -21,7 +21,7 @@ class QuestionPolicy
      */
     public function view(User $user, Question $question): bool
     {
-        //
+        return $user->hasAnyPermission(['handle questions', 'view questions']) ||  $user->id === $question->id;
     }
 
     /**
@@ -29,7 +29,7 @@ class QuestionPolicy
      */
     public function create(User $user): bool
     {
-        //
+        return $user->hasAnyPermission(['handle questions', 'create questions']);
     }
 
     /**
@@ -37,7 +37,7 @@ class QuestionPolicy
      */
     public function update(User $user, Question $question): bool
     {
-        //
+        return $user->hasPermissionTo('handle questions') || ($user->hasPermissionTo('update questions') && $user->id === $question->id);
     }
 
     /**
@@ -45,7 +45,7 @@ class QuestionPolicy
      */
     public function delete(User $user, Question $question): bool
     {
-        //
+        return $user->hasPermissionTo('handle questions') || ($user->hasPermissionTo('delete questions') && $user->id === $question->id);
     }
 
     /**
@@ -53,7 +53,7 @@ class QuestionPolicy
      */
     public function restore(User $user, Question $question): bool
     {
-        //
+        return false;
     }
 
     /**
@@ -61,6 +61,6 @@ class QuestionPolicy
      */
     public function forceDelete(User $user, Question $question): bool
     {
-        //
+        return false;
     }
 }

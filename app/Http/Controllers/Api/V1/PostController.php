@@ -14,15 +14,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        $this->authorize('view-any', Post::class);
     }
 
     /**
@@ -30,7 +22,7 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-        //
+        $this->authorize('create', Post::class);
     }
 
     /**
@@ -38,15 +30,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Post $post)
-    {
-        //
+        $this->authorize('view', $post);
     }
 
     /**
@@ -54,7 +38,7 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, Post $post)
     {
-        //
+        $this->authorize('update', $post);
     }
 
     /**
@@ -62,6 +46,6 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $this->authorize('delete', $post);
     }
 }

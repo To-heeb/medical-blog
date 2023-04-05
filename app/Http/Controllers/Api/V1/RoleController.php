@@ -16,6 +16,8 @@ class RoleController extends Controller
      */
     public function index()
     {
+        $this->authorize('view-any', Role::class);
+
         $roles = Role::whereNotIn('name', ['super-admin'])->get();
     }
 
@@ -24,7 +26,7 @@ class RoleController extends Controller
      */
     public function store(StoreRoleRequest $request)
     {
-        //
+        $this->authorize('create', Role::class);
     }
 
     /**
@@ -32,7 +34,7 @@ class RoleController extends Controller
      */
     public function show(Role $role)
     {
-        //
+        $this->authorize('view', $role);
     }
 
 
@@ -41,7 +43,7 @@ class RoleController extends Controller
      */
     public function update(UpdateRoleRequest $request, Role $role)
     {
-        //
+        $this->authorize('update', $role);
     }
 
     /**
@@ -49,6 +51,6 @@ class RoleController extends Controller
      */
     public function destroy(Role $role)
     {
-        //
+        $this->authorize('delete', $role);
     }
 }

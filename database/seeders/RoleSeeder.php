@@ -26,7 +26,6 @@ class RoleSeeder extends Seeder
                 [
                     'roles',
                     'permissions',
-                    'tags',
                     'answers',
                     'logs'
                 ]
@@ -38,7 +37,10 @@ class RoleSeeder extends Seeder
                 [
                     'roles',
                     'permissions',
-                    'logs'
+                    'tags',
+                    'categories',
+                    'logs',
+                    'handle'
                 ]
             )
         )->toArray());
@@ -50,7 +52,9 @@ class RoleSeeder extends Seeder
                     'permissions',
                     'tags',
                     'answers',
-                    'logs'
+                    'categories',
+                    'logs',
+                    'handle'
                 ]
             )
         )->toArray());

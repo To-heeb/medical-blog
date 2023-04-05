@@ -14,15 +14,7 @@ class AnswerController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        $this->authorize('view-any', Answer::class);
     }
 
     /**
@@ -30,7 +22,7 @@ class AnswerController extends Controller
      */
     public function store(StoreAnswerRequest $request)
     {
-        //
+        $this->authorize('create', Answer::class);
     }
 
     /**
@@ -38,15 +30,7 @@ class AnswerController extends Controller
      */
     public function show(Answer $answer)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Answer $answer)
-    {
-        //
+        $this->authorize('view', $answer);
     }
 
     /**
@@ -54,7 +38,7 @@ class AnswerController extends Controller
      */
     public function update(UpdateAnswerRequest $request, Answer $answer)
     {
-        //
+        $this->authorize('update', $answer);
     }
 
     /**
@@ -62,6 +46,6 @@ class AnswerController extends Controller
      */
     public function destroy(Answer $answer)
     {
-        //
+        $this->authorize('delete', $answer);
     }
 }

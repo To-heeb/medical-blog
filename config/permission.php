@@ -168,6 +168,12 @@ return [
     'permissions' => [
 
         // Users
+        'handle users' => [
+            'display_name' => 'Handle all users',
+            'description'  => 'Can handle all users',
+            'group'        => 'Answer',
+        ],
+
         'view users' => [
             'display_name' => 'View users',
             'description'  => 'Can view users',
@@ -180,9 +186,9 @@ return [
             'group'        => 'User',
         ],
 
-        'edit users' => [
-            'display_name' => 'Edit users',
-            'description'  => 'Can edit users',
+        'update users' => [
+            'display_name' => 'Update users',
+            'description'  => 'Can update users',
             'group'        => 'User',
         ],
 
@@ -193,6 +199,12 @@ return [
         ],
 
         // Roles
+        'handle roles' => [
+            'display_name' => 'Handle all roles',
+            'description'  => 'Can handle all roles',
+            'group'        => 'Answer',
+        ],
+
         'view roles' => [
             'display_name' => 'View roles',
             'description'  => 'Can view roles',
@@ -205,9 +217,9 @@ return [
             'group'        => 'Role',
         ],
 
-        'edit roles' => [
-            'display_name' => 'Edit roles',
-            'description'  => 'Can edit roles',
+        'update roles' => [
+            'display_name' => 'Update roles',
+            'description'  => 'Can update roles',
             'group'        => 'Role',
         ],
 
@@ -218,6 +230,12 @@ return [
         ],
 
         // Permissions
+        'handle permissions' => [
+            'display_name' => 'Handle all permissions',
+            'description'  => 'Can handle all permissions',
+            'group'        => 'Answer',
+        ],
+
         'view permissions' => [
             'display_name' => 'View permissions',
             'description'  => 'Can view permissions',
@@ -230,9 +248,9 @@ return [
             'group'        => 'Permission',
         ],
 
-        'edit permissions' => [
-            'display_name' => 'Edit permissions',
-            'description'  => 'Can edit permissions',
+        'update permissions' => [
+            'display_name' => 'Update permissions',
+            'description'  => 'Can update permissions',
             'group'        => 'Permission',
         ],
 
@@ -243,6 +261,12 @@ return [
         ],
 
         // Answers
+        'handle answers' => [
+            'display_name' => 'Handle all answers',
+            'description'  => 'Can handle all answers',
+            'group'        => 'Answer',
+        ],
+
         'manage answers' => [
             'display_name' => 'Manage all answers',
             'description'  => 'Can manage all answers',
@@ -261,9 +285,9 @@ return [
             'group'        => 'Answer',
         ],
 
-        'edit answers' => [
-            'display_name' => 'Edit answers',
-            'description'  => 'Can edit answers',
+        'update answers' => [
+            'display_name' => 'Update answers',
+            'description'  => 'Can update answers',
             'group'        => 'Answer',
         ],
 
@@ -274,6 +298,12 @@ return [
         ],
 
         // Post
+        'handle posts' => [
+            'display_name' => 'Handle all posts',
+            'description'  => 'Can handle all posts',
+            'group'        => 'Answer',
+        ],
+
         'view posts' => [
             'display_name' => 'View posts',
             'description'  => 'Can view posts',
@@ -286,9 +316,9 @@ return [
             'group'        => 'Post',
         ],
 
-        'edit posts' => [
-            'display_name' => 'Edit posts',
-            'description'  => 'Can edit posts',
+        'update posts' => [
+            'display_name' => 'Update posts',
+            'description'  => 'Can update posts',
             'group'        => 'Post',
         ],
 
@@ -299,6 +329,12 @@ return [
         ],
 
         // Questions
+        'handle questions' => [
+            'display_name' => 'Handle all questions',
+            'description'  => 'Can handle all questions',
+            'group'        => 'Answer',
+        ],
+
         'view questions' => [
             'display_name' => 'View questions',
             'description'  => 'Can view questions',
@@ -311,9 +347,9 @@ return [
             'group'        => 'Question',
         ],
 
-        'edit questions' => [
-            'display_name' => 'Edit questions',
-            'description'  => 'Can edit questions',
+        'update questions' => [
+            'display_name' => 'Update questions',
+            'description'  => 'Can update questions',
             'group'        => 'Question',
         ],
 
@@ -325,6 +361,12 @@ return [
 
 
         // Comments
+        'handle comments' => [
+            'display_name' => 'Handle all comments',
+            'description'  => 'Can handle all comments',
+            'group'        => 'Answer',
+        ],
+
         'view comments' => [
             'display_name' => 'View comments',
             'description'  => 'Can view comments',
@@ -337,9 +379,9 @@ return [
             'group'        => 'Comment',
         ],
 
-        'edit comments' => [
-            'display_name' => 'Edit comments',
-            'description'  => 'Can edit comments',
+        'update comments' => [
+            'display_name' => 'Update comments',
+            'description'  => 'Can update comments',
             'group'        => 'Comment',
         ],
 
@@ -350,6 +392,12 @@ return [
         ],
 
         // Tags
+        'handle tags' => [
+            'display_name' => 'Handle all tags',
+            'description'  => 'Can handle all tags',
+            'group'        => 'Answer',
+        ],
+
         'view tags' => [
             'display_name' => 'View tags',
             'description'  => 'Can view tags',
@@ -362,9 +410,9 @@ return [
             'group'        => 'Tag',
         ],
 
-        'edit tags' => [
-            'display_name' => 'Edit tags',
-            'description'  => 'Can edit tags',
+        'update tags' => [
+            'display_name' => 'Update tags',
+            'description'  => 'Can update tags',
             'group'        => 'Tag',
         ],
 
@@ -375,6 +423,12 @@ return [
         ],
 
         // Categories
+        'handle categories' => [
+            'display_name' => 'Handle all categories',
+            'description'  => 'Can handle all categories',
+            'group'        => 'Answer',
+        ],
+
         'view categories' => [
             'display_name' => 'View categories',
             'description'  => 'Can view categories',
@@ -387,9 +441,9 @@ return [
             'group'        => 'Category',
         ],
 
-        'edit categories' => [
-            'display_name' => 'Edit categories',
-            'description'  => 'Can edit categories',
+        'update categories' => [
+            'display_name' => 'Update categories',
+            'description'  => 'Can update categories',
             'group'        => 'Category',
         ],
 

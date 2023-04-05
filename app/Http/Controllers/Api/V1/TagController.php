@@ -14,7 +14,7 @@ class TagController extends Controller
      */
     public function index()
     {
-        //
+        $this->authorize('view-any', Tag::class);
     }
 
     /**
@@ -22,7 +22,7 @@ class TagController extends Controller
      */
     public function store(StoreTagRequest $request)
     {
-        //
+        $this->authorize('create', Tag::class);
     }
 
     /**
@@ -30,7 +30,7 @@ class TagController extends Controller
      */
     public function show(Tag $tag)
     {
-        //
+        $this->authorize('view', Tag::class);
     }
 
 
@@ -39,7 +39,7 @@ class TagController extends Controller
      */
     public function update(UpdateTagRequest $request, Tag $tag)
     {
-        //
+        $this->authorize('update', Tag::class);
     }
 
     /**
@@ -47,6 +47,6 @@ class TagController extends Controller
      */
     public function destroy(Tag $tag)
     {
-        //
+        $this->authorize('delete', Tag::class);
     }
 }

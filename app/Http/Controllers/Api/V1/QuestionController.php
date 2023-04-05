@@ -14,7 +14,7 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        //
+        $this->authorize('view-any', Question::class);
     }
 
     /**
@@ -22,7 +22,7 @@ class QuestionController extends Controller
      */
     public function store(StoreQuestionRequest $request)
     {
-        //
+        $this->authorize('create', Question::class);
     }
 
     /**
@@ -30,15 +30,7 @@ class QuestionController extends Controller
      */
     public function show(Question $question)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Question $question)
-    {
-        //
+        $this->authorize('view', $question);
     }
 
     /**
@@ -46,7 +38,7 @@ class QuestionController extends Controller
      */
     public function update(UpdateQuestionRequest $request, Question $question)
     {
-        //
+        $this->authorize('update', $question);
     }
 
     /**
@@ -54,6 +46,6 @@ class QuestionController extends Controller
      */
     public function destroy(Question $question)
     {
-        //
+        $this->authorize('delete', $question);
     }
 }

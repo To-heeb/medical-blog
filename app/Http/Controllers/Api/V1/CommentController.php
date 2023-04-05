@@ -14,7 +14,7 @@ class CommentController extends Controller
      */
     public function index()
     {
-        //
+        $this->authorize('view-any', Comment::class);
     }
 
     /**
@@ -22,7 +22,7 @@ class CommentController extends Controller
      */
     public function store(StoreCommentRequest $request)
     {
-        //
+        $this->authorize('create', Comment::class);
     }
 
     /**
@@ -30,7 +30,7 @@ class CommentController extends Controller
      */
     public function show(Comment $comment)
     {
-        //
+        $this->authorize('view', $comment);
     }
 
     /**
@@ -38,7 +38,7 @@ class CommentController extends Controller
      */
     public function update(UpdateCommentRequest $request, Comment $comment)
     {
-        //
+        $this->authorize('update', $comment);
     }
 
     /**
@@ -46,6 +46,6 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment)
     {
-        //
+        $this->authorize('delete', $comment);
     }
 }

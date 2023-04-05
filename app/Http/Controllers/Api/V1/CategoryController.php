@@ -15,7 +15,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $this->authorize('view-any', Category::class);
     }
 
     /**
@@ -23,7 +23,7 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-        //
+        $this->authorize('create', Category::class);
     }
 
     /**
@@ -31,7 +31,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+        $this->authorize('view', $category);
     }
 
 
@@ -40,7 +40,7 @@ class CategoryController extends Controller
      */
     public function update(UpdateCategoryRequest $request, Category $category)
     {
-        //
+        $this->authorize('update', $category);
     }
 
     /**
@@ -48,6 +48,6 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $this->authorize('delete', $category);
     }
 }

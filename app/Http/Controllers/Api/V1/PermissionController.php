@@ -17,7 +17,7 @@ class PermissionController extends Controller
      */
     public function index()
     {
-        //
+        $this->authorize('view-any', Permission::class);
     }
 
     /**
@@ -25,7 +25,7 @@ class PermissionController extends Controller
      */
     public function store(StorePermissionRequest $request)
     {
-        //
+        $this->authorize('create', Permission::class);
     }
 
     /**
@@ -33,7 +33,7 @@ class PermissionController extends Controller
      */
     public function show(Permission $permission)
     {
-        //
+        $this->authorize('view', $permission);
     }
 
 
@@ -42,7 +42,7 @@ class PermissionController extends Controller
      */
     public function update(UpdatePermissionRequest $request, Permission $permission)
     {
-        //
+        $this->authorize('update', $permission);
     }
 
     /**
@@ -50,6 +50,6 @@ class PermissionController extends Controller
      */
     public function destroy(Permission $permission)
     {
-        //
+        $this->authorize('delete', $permission);
     }
 }
