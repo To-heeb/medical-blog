@@ -2,9 +2,14 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\V1\TagController;
 use App\Http\Controllers\Api\V1\PostController;
 use App\Http\Controllers\Api\V1\RoleController;
+use App\Http\Controllers\Api\V1\UserController;
+use App\Http\Controllers\Api\V1\AnswerController;
 use App\Http\Controllers\Api\V1\CommentController;
+use App\Http\Controllers\Api\V1\CategoryController;
+use App\Http\Controllers\Api\V1\QuestionController;
 use App\Http\Controllers\Api\V1\PermissionController;
 use App\Http\Controllers\Api\V1\RolePermissionController;
 use App\Http\Controllers\Api\V1\UserPermissionController;
@@ -55,9 +60,14 @@ Route::group([
     ], function () {
 
         Route::apiResources([
-            'post'          => PostController::class,
-            'comment'       => CommentController::class,
+            'users'         =>   UserController::class,
+            'tags'          =>   TagController::class,
+            'posts'         =>   PostController::class,
+            'comments'      =>   CommentController::class,
+            'questions'     =>   QuestionController::class,
+            'answers'       =>   AnswerController::class,
             'roles'         =>   RoleController::class,
+            'categories'    =>   CategoryController::class,
             'permissions'   =>   PermissionController::class,
         ]);
 

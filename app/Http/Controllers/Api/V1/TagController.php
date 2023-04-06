@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\V1;
 
 use App\Models\Tag;
 use App\Http\Controllers\Controller;
@@ -30,7 +30,7 @@ class TagController extends Controller
      */
     public function show(Tag $tag)
     {
-        $this->authorize('view', Tag::class);
+        $this->authorize('view', $tag);
     }
 
 
@@ -39,7 +39,7 @@ class TagController extends Controller
      */
     public function update(UpdateTagRequest $request, Tag $tag)
     {
-        $this->authorize('update', Tag::class);
+        $this->authorize('update', $tag);
     }
 
     /**
@@ -47,6 +47,6 @@ class TagController extends Controller
      */
     public function destroy(Tag $tag)
     {
-        $this->authorize('delete', Tag::class);
+        $this->authorize('delete', $tag);
     }
 }
