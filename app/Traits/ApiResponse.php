@@ -2,6 +2,8 @@
 
 namespace App\Http\Traits;
 
+use Illuminate\Http\Response;
+
 trait ApiResponse
 {
 
@@ -10,9 +12,9 @@ trait ApiResponse
      * @param $data
      * @param $statusCode
      * @param $message
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    function success($data, $statusCode, $message)
+    function success($data, $statusCode = Response::HTTP_OK, $message)
     {
         return response()->json([
             "data" => $data,
@@ -26,10 +28,10 @@ trait ApiResponse
      * Generic success response without data as part of output.
      * @param $statusCode
      * @param $message
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
 
-    function successWithoutData($statusCode, $message)
+    function successWithoutData($statusCode = Response::HTTP_NO_CONTENT, $message)
     {
         return response()->json([
             "status" => true,
@@ -42,7 +44,7 @@ trait ApiResponse
      * Generic response when a request fails.
      * @param $statusCode
      * @param $message
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     function error($statusCode, $message)
     {

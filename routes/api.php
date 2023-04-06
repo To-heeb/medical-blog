@@ -2,10 +2,18 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\V1\AuthController;
+use App\Http\Controllers\Api\V1\PostController;
 use App\Http\Controllers\Api\V1\RoleController;
+use App\Http\Controllers\Api\V1\CommentController;
 use App\Http\Controllers\Api\V1\PermissionController;
 use App\Http\Controllers\Api\V1\RolePermissionController;
+use App\Http\Controllers\Api\V1\UserPermissionController;
+use App\Http\Controllers\Api\V1\Auth\NewPasswordController;
+use App\Http\Controllers\Api\V1\Auth\VerifyEmailController;
+use App\Http\Controllers\Api\V1\Auth\RegisteredUserController;
+use App\Http\Controllers\Api\V1\Auth\PasswordResetLinkController;
+use App\Http\Controllers\Api\V1\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Api\V1\Auth\EmailVerificationNotificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,27 +31,32 @@ Route::group([
     'as' => 'api.'
 ], function () {
 
-    // admin
-    Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
-        Route::post('/login', [AuthController::class, 'admin_login'])->name('login');
-        Route::post('/register', [AuthController::class, 'admin_register'])->name('register');
-    });
+    Route::post('/sanctum/token', [RegisteredUserController::class, 'store'])->name('token');
 
-    // user
-    Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
-        Route::post('/login', [AuthController::class, 'user_login'])->name('login');
-        Route::post('/register', [AuthController::class, 'user_register'])->name('register');
-    });
+    Route::post('/register', [RegisteredUserController::class, 'store'])->name('register');
+
+    Route::post('/login', [AuthenticatedSessionController::class, 'store'])->name('login');
+
+    Route::post('/forgot-password', [PasswordResetLinkController::class, 'store'])->name('password.email');
+
+    Route::post('/reset-password', [NewPasswordController::class, 'store'])->name('password.store');
+
+    Route::get('/verify-email/{id}/{hash}', VerifyEmailController::class)
+        ->middleware(['auth:sanctum', 'signed', 'throttle:6,1'])
+        ->name('verification.verify');
+
+    Route::post('/email/verification-notification', [EmailVerificationNotificationController::class, 'store'])
+        ->middleware(['auth', 'throttle:6,1'])
+        ->name('verification.send');
 
 
-    // admin
     Route::group([
-        'prefix' => 'admin',
-        'middleware' =>  ['auth:sanctum', 'role:super-admin'],
-        'as' => 'admin.',
+        'middleware' =>  ['auth:sanctum'],
     ], function () {
 
         Route::apiResources([
+            'post'          => PostController::class,
+            'comment'       => CommentController::class,
             'roles'         =>   RoleController::class,
             'permissions'   =>   PermissionController::class,
         ]);
@@ -51,19 +64,15 @@ Route::group([
         Route::name('roles.')
             ->group(function () {
                 // Role Permissions
-                Route::apiResource('roles/{role}/permissions/{permission}', RolePermissionController::class)->only('store', 'destroy');
+                Route::apiResource('roles/{role}/permissions', RolePermissionController::class)->only('store', 'destroy');
             });
 
         Route::name('users.')
             ->group(function () {
-                // Role Permissions
-                Route::apiResource('users/{user}/permissions/{permission}', UserPermissionController::class)->only('store', 'destroy');
+                // User Permissions
+                Route::apiResource('users/{user}/permissions', UserPermissionController::class)->only('store', 'destroy');
             });
+
+        Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
     });
-
-    // user
-});
-
-Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
-    return $request->user();
 });

@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class RoleSeeder extends Seeder
@@ -19,6 +20,13 @@ class RoleSeeder extends Seeder
         $user = Role::create(['name' => 'user']);
 
         $permissions = collect(config('permission.permissions'))->keys();
+
+        $permissions_with_guard = collect($permissions->toArray())->map(function ($permission) {
+            return ['name' => $permission, 'guard_name' => 'web'];
+        });
+
+        Permission::insert($permissions_with_guard->toArray());
+
         $super_admin->syncPermissions($permissions);
 
         $admin->syncPermissions($permissions->filter(
