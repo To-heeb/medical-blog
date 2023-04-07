@@ -8,4 +8,22 @@ use Illuminate\Database\Eloquent\Model;
 class Tag extends Model
 {
     use HasFactory;
+
+
+    /**
+     * The fields that are searchable.
+     *
+     */
+    protected $searchableFields = [
+        'name'
+    ];
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name'
+    ];
 }

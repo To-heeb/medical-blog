@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\V1;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\UserResource;
 use App\Http\Requests\User\StoreUserRequest;
 use App\Http\Requests\User\UpdateUserRequest;
 
@@ -16,6 +17,8 @@ class UserController extends Controller
     public function index()
     {
         $this->authorize('view-any', User::class);
+
+        #return UserResource::collection(user::all());
     }
 
     /**

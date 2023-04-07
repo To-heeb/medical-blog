@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Models\Comment;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\CommentResource;
 use App\Http\Requests\Comment\StoreCommentRequest;
 use App\Http\Requests\Comment\UpdateCommentRequest;
 
@@ -12,9 +14,13 @@ class CommentController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $this->authorize('view-any', Comment::class);
+
+        return CommentResource::collection(
+            Comment::latest()->paginate($request->input('limit', 20))
+        );
     }
 
     /**
@@ -31,6 +37,8 @@ class CommentController extends Controller
     public function show(Comment $comment)
     {
         $this->authorize('view', $comment);
+
+        return new CommentResource($comment);
     }
 
     /**
@@ -47,5 +55,9 @@ class CommentController extends Controller
     public function destroy(Comment $comment)
     {
         $this->authorize('delete', $comment);
+
+        $comment->delete();
+
+        return response()->noContent();
     }
 }
