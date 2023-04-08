@@ -29,4 +29,21 @@ class Question extends Model
         'likes',
         'answers'
     ];
+
+
+    /**
+     * Get the answers for the question.
+     */
+    public function answers()
+    {
+        return $this->hasMany(Answer::class);
+    }
+
+    /**
+     * Get the user that owns the question.
+     */
+    public function user()
+    {
+        return $this->belongsTo(user::class);
+    }
 }

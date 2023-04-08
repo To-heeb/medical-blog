@@ -19,4 +19,13 @@ class Like extends Model
         'likeable_type',
         'user_id',
     ];
+
+
+    /**
+     * Get the parent likable model (user or post).
+     */
+    public function likeable()
+    {
+        return $this->morphTo();
+    }
 }

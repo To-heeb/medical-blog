@@ -43,9 +43,41 @@ class Post extends Model
 
 
     /**
+     * Get the comments for the blog post.
+     */
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    /**
+     * Get the user that owns the post.
+     */
+    public function user()
+    {
+        return $this->belongsTo(user::class);
+    }
+
+
+    /**
+     * Get all of the post's likes.
+     */
+    public function likes()
+    {
+        return $this->morphMany(Like::class, 'likeable');
+    }
+
+    /**
+     * Get the user's most liked post.
+     */
+    public function bestPost()
+    {
+        return $this->morphOne(Like::class, 'likeable')->ofMany('likes', 'max');
+    }
+
+    /**
      * return the excerpt of the post content
      */
-
     public function excerpt(int $length = 50): string
     {
         return Str::limit($this->content, $length);

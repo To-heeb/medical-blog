@@ -19,4 +19,20 @@ class Answer extends Model
         'question_id',
         'content',
     ];
+
+    /**
+     * Get the question that owns the answer.
+     */
+    public function question()
+    {
+        return $this->belongsTo(Question::class);
+    }
+
+    /**
+     * Get the user that owns the question.
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
