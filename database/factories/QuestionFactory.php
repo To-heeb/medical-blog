@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -23,7 +24,7 @@ class QuestionFactory extends Factory
             'title' => fake()->sentence(),
             'slug' => Str::slug($title),
             'content' => fake()->paragraph(5),
-            'category_id' => Category::factory()->create()->id,
+            'user_id' => User::factory(),
             'published' => true,
         ];
     }

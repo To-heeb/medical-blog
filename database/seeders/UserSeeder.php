@@ -19,6 +19,7 @@ class UserSeeder extends Seeder
             ->hasQuestions(3)
             ->hasComments(3)
             ->hasLikes(3)
-            ->create();
+            ->create()
+            ->assignRole('user');
     }
 }
