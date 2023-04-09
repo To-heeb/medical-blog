@@ -28,8 +28,10 @@ class DatabaseSeeder extends Seeder
         ]);
 
         \App\Models\User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'admin@admin.com',
+            'name' => 'Toheeb Oyekola',
+            'first_name' => 'Toheeb',
+            'last_name' => 'Oyekola',
+            'email' => 'toheeb@admin.com',
             'password' => Hash::make('admin'),
         ])->assignRole('super-admin');
     }

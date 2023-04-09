@@ -21,7 +21,7 @@ class QuestionFactory extends Factory
     {
         $title = fake()->sentence();
         return [
-            'title' => fake()->sentence(),
+            'title' =>  $title,
             'slug' => Str::slug($title),
             'content' => fake()->paragraph(5),
             'user_id' => User::factory(),
