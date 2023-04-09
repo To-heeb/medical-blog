@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\NewsletterSubscription;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class NewsletterSubscriptionSeeder extends Seeder
 {
@@ -12,6 +13,8 @@ class NewsletterSubscriptionSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        NewsletterSubscription::factory()
+            ->count(3)
+            ->create();
     }
 }

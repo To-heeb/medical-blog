@@ -21,8 +21,10 @@ return new class extends Migration
             $table->string('title');
             $table->string('slug')->unique();
             $table->longText('content');
-            $table->integer('view_count')->unsigned()->default(0)->index();
-            $table->boolean('published')->default(0)->nullable();
+            $table->unsignedInteger('view_count')->default(0)->index();
+            $table->unsignedInteger('likes_count')->default(0);
+            $table->boolean('published')->default(false)->nullable();
+            $table->timestamp('published_at')->nullable();
             $table->timestamps();
             // come back to add things to the table
         });

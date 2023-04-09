@@ -6,6 +6,7 @@ use Illuminate\Support\Str;
 use App\Models\Scopes\Searchable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class Post extends Model
 {
@@ -18,6 +19,16 @@ class Post extends Model
     protected $searchableFields = [
         'title',
         'slug'
+    ];
+
+
+    /**
+     * The event map for the model.
+     *
+     * @var array
+     */
+    protected $dispatchesEvents = [
+        'retrieved'   => LikeUpdated::class,
     ];
 
     /**
@@ -67,12 +78,24 @@ class Post extends Model
         return $this->morphMany(Like::class, 'likeable');
     }
 
+
+    /**
+     * Get all of the tags for the post.
+     */
+    public function tags(): MorphToMany
+    {
+        return $this->morphToMany(Tag::class, 'taggable');
+    }
+
     /**
      * Get the user's most liked post.
      */
-    public function bestPost()
+    public function mostLikedPost()
     {
-        return $this->morphOne(Like::class, 'likeable')->ofMany('likes', 'max');
+        return $this->withCount('likes')
+            ->with('likes')
+            ->orderByDesc('likes_count')
+            ->first();
     }
 
     /**

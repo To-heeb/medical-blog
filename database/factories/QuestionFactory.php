@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,8 +18,13 @@ class QuestionFactory extends Factory
      */
     public function definition(): array
     {
+        $title = fake()->sentence();
         return [
-            //
+            'title' => fake()->sentence(),
+            'slug' => Str::slug($title),
+            'content' => fake()->paragraph(5),
+            'category_id' => Category::factory()->create()->id,
+            'published' => true,
         ];
     }
 }

@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Post;
+use App\Models\Comment;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class CommentSeeder extends Seeder
 {
@@ -12,6 +14,11 @@ class CommentSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        $post = Post::factory()->create();
+
+        Comment::factory()
+            ->count(3)
+            ->for($post)
+            ->create();
     }
 }

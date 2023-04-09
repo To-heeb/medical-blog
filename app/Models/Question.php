@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class Question extends Model
 {
@@ -30,6 +31,15 @@ class Question extends Model
         'answers'
     ];
 
+    /**
+     * The event map for the model.
+     *
+     * @var array
+     */
+    // protected $dispatchesEvents = [
+    //     'retrieved'   => LikeUpdated::class,
+    // ];
+
 
     /**
      * Get the answers for the question.
@@ -45,5 +55,21 @@ class Question extends Model
     public function user()
     {
         return $this->belongsTo(user::class);
+    }
+
+    /**
+     * Get all of the question's likes.
+     */
+    public function likes()
+    {
+        return $this->morphMany(Like::class, 'likeable');
+    }
+
+    /**
+     * Get all of the tags for the post.
+     */
+    public function tags(): MorphToMany
+    {
+        return $this->morphToMany(Tag::class, 'taggable');
     }
 }

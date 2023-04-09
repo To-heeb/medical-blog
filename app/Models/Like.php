@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Events\LikeUpdated;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Like extends Model
 {
@@ -19,6 +20,17 @@ class Like extends Model
         'likeable_type',
         'user_id',
     ];
+
+
+    /**
+     * The event map for the model.
+     *
+     * @var array
+     */
+    // protected $dispatchesEvents = [
+    //     'saved'     => LikeUpdated::class,
+    //     'deleted'   => LikeUpdated::class,
+    // ];
 
 
     /**
