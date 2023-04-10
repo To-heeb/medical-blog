@@ -21,6 +21,14 @@ class Answer extends Model
     ];
 
     /**
+     * The fields that are searchable.
+     *
+     */
+    protected $searchableFields = [
+        'content'
+    ];
+
+    /**
      * Get the question that owns the answer.
      */
     public function question()

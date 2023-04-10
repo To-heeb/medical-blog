@@ -7,7 +7,7 @@ use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Role\StoreRoleRequest;
 use App\Http\Requests\Role\UpdateRoleRequest;
-
+use App\Http\Resources\RoleResource;
 
 class RoleController extends Controller
 {
@@ -19,6 +19,8 @@ class RoleController extends Controller
         $this->authorize('view-any', Role::class);
 
         $roles = Role::whereNotIn('name', ['super-admin'])->get();
+
+        return new RoleResource($roles);
     }
 
     /**
@@ -27,6 +29,12 @@ class RoleController extends Controller
     public function store(StoreRoleRequest $request)
     {
         $this->authorize('create', Role::class);
+
+        $validated = $request->validated();
+
+        $role = Role::create($validated);
+
+        return new RoleResource($role);
     }
 
     /**
@@ -35,6 +43,8 @@ class RoleController extends Controller
     public function show(Role $role)
     {
         $this->authorize('view', $role);
+
+        return new RoleResource($role);
     }
 
 
@@ -44,6 +54,12 @@ class RoleController extends Controller
     public function update(UpdateRoleRequest $request, Role $role)
     {
         $this->authorize('update', $role);
+
+        $validated = $request->validated();
+
+        $role->update($validated);
+
+        return new RoleResource($role);
     }
 
     /**
@@ -52,5 +68,9 @@ class RoleController extends Controller
     public function destroy(Role $role)
     {
         $this->authorize('delete', $role);
+
+        $role->delete();
+
+        return response()->noContent();
     }
 }

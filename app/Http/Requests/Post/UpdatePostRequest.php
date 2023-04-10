@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests\Post;
 
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdatePostRequest extends FormRequest
@@ -11,7 +13,22 @@ class UpdatePostRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
+    }
+
+
+    /**
+     * Prepare the data for validation.
+     */
+    protected function prepareForValidation(): void
+    {
+        $this->merge([
+            'slug' => Str::slug($this->input('title'))
+        ]);
+
+        $this->merge([
+            'user_id' => Auth::user()->id ?? null
+        ]);
     }
 
     /**
@@ -22,7 +39,11 @@ class UpdatePostRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => 'required|unique:posts,title,' . (optional($this->post)->id ?: 'NULL'),
+            'content' => 'required',
+            'category_id' =>  'required|exists:categories,id',
+            'user_id' => 'required|exists:users,id',
+            'slug' => 'unique:posts,slug,' . (optional($this->post)->id ?: 'NULL'),
         ];
     }
 }

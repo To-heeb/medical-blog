@@ -23,6 +23,7 @@ return new class extends Migration
             $table->unsignedInteger('view_count')->default(0)->index();
             $table->unsignedInteger('likes_count')->default(0);
             $table->boolean('published')->default(0)->nullable();
+            $table->timestamp('published_at')->nullable();
             $table->timestamps();
         });
     }

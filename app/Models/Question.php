@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Models\Scopes\Searchable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class Question extends Model
 {
-    use HasFactory;
+    use HasFactory, Searchable;
 
 
     /**
@@ -28,7 +29,19 @@ class Question extends Model
     protected $with = [
         'user',
         'likes',
-        'answers'
+        'answers',
+        'tags'
+    ];
+
+
+    /**
+     * The fields that are searchable.
+     *
+     */
+    protected $searchableFields = [
+        'title',
+        'slug',
+        'content'
     ];
 
     /**

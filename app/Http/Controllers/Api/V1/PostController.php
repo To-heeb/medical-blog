@@ -24,7 +24,7 @@ class PostController extends Controller
         $posts = Post::search($search)
             ->withCount('comments', 'likes')
             ->latest()
-            ->paginate($request->input('limit', 20));
+            ->paginate($request->input('limit', 5));
 
         return new PostCollection($posts);
     }

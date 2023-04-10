@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\CommentResource;
 use App\Http\Requests\Comment\StoreCommentRequest;
 use App\Http\Requests\Comment\UpdateCommentRequest;
+use App\Http\Resources\CommentCollection;
 
 class CommentController extends Controller
 {
@@ -18,9 +19,11 @@ class CommentController extends Controller
     {
         $this->authorize('view-any', Comment::class);
 
-        return CommentResource::collection(
-            Comment::latest()->paginate($request->input('limit', 20))
-        );
+        $validated = $request->validated();
+
+        $comments = Comment::create($validated);
+
+        return new CommentCollection($comments);
     }
 
     /**
@@ -29,6 +32,12 @@ class CommentController extends Controller
     public function store(StoreCommentRequest $request)
     {
         $this->authorize('create', Comment::class);
+
+        $validated = $request->validated();
+
+        $comment = Comment::create($validated);
+
+        return new CommentResource($comment);
     }
 
     /**
@@ -47,6 +56,12 @@ class CommentController extends Controller
     public function update(UpdateCommentRequest $request, Comment $comment)
     {
         $this->authorize('update', $comment);
+
+        $validated = $request->validated();
+
+        $comment->update($validated);
+
+        return new CommentResource($comment);
     }
 
     /**

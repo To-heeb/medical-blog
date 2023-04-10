@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\LikeUpdated;
 use Illuminate\Support\Str;
 use App\Models\Scopes\Searchable;
 use Illuminate\Database\Eloquent\Model;
@@ -12,24 +13,15 @@ class Post extends Model
 {
     use HasFactory, Searchable;
 
-    /**
-     * The fields that are searchable.
-     *
-     */
-    protected $searchableFields = [
-        'title',
-        'slug'
-    ];
-
 
     /**
      * The event map for the model.
      *
      * @var array
      */
-    protected $dispatchesEvents = [
-        'retrieved'   => LikeUpdated::class,
-    ];
+    // protected $dispatchesEvents = [
+    //     'retrieved'   => LikeUpdated::class,
+    // ];
 
     /**
      * The attributes that are mass assignable.
@@ -49,9 +41,27 @@ class Post extends Model
     protected $with = [
         'user',
         'likes',
-        'comments'
+        'comments',
+        'tags'
     ];
 
+    /**
+     * The fields that are searchable.
+     *
+     */
+    protected $searchableFields = [
+        'title',
+        'slug',
+        'content'
+    ];
+
+    /**
+     * Get the post's category.
+     */
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 
     /**
      * Get the comments for the blog post.

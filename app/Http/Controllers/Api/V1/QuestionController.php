@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Models\Question;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\QuestionResource;
+use App\Http\Resources\QuestionCollection;
 use App\Http\Requests\Question\StoreQuestionRequest;
 use App\Http\Requests\Question\UpdateQuestionRequest;
 
@@ -12,9 +15,18 @@ class QuestionController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $this->authorize('view-any', Question::class);
+
+        $search = $request->get('search', '');
+
+        $questions = Question::search($search)
+            ->withCount('answers', 'likes')
+            ->latest()
+            ->paginate($request->input('limit', 5));
+
+        return new QuestionCollection($questions);
     }
 
     /**
@@ -23,6 +35,12 @@ class QuestionController extends Controller
     public function store(StoreQuestionRequest $request)
     {
         $this->authorize('create', Question::class);
+
+        $validated = $request->validated();
+
+        $question = Question::create($validated);
+
+        return new QuestionResource($question);
     }
 
     /**
@@ -31,6 +49,8 @@ class QuestionController extends Controller
     public function show(Question $question)
     {
         $this->authorize('view', $question);
+
+        return new QuestionResource($question);
     }
 
     /**
@@ -39,6 +59,12 @@ class QuestionController extends Controller
     public function update(UpdateQuestionRequest $request, Question $question)
     {
         $this->authorize('update', $question);
+
+        $validated = $request->validated();
+
+        $question->update($validated);
+
+        return new QuestionResource($question);
     }
 
     /**
@@ -47,5 +73,9 @@ class QuestionController extends Controller
     public function destroy(Question $question)
     {
         $this->authorize('delete', $question);
+
+        $question->delete();
+
+        return response()->noContent();
     }
 }

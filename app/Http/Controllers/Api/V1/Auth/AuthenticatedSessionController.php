@@ -17,7 +17,9 @@ class AuthenticatedSessionController extends Controller
     {
         $request->authenticate();
 
+        #with('roles:id,name')->
         $user = User::whereEmail($request->email)->firstOrFail();
+        $user['role'] = $user->getRoleNames()->toArray()[0];
 
         $token = $user->createToken('auth-token of' . $user->name);
 
