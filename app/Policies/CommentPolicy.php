@@ -20,7 +20,7 @@ class CommentPolicy
      */
     public function view(User $user, Comment $comment): bool
     {
-        return $user->hasAnyPermission(['handle comments', 'view comments']) ||  $user->id === $comment->id;
+        return $user->hasAnyPermission(['handle comments', 'view comments']) ||  $user->id === $comment->user_id;
     }
 
     /**
@@ -36,7 +36,7 @@ class CommentPolicy
      */
     public function update(User $user, Comment $comment): bool
     {
-        return $user->hasPermissionTo('handle comments') || ($user->hasPermissionTo('update comments') && $user->id === $comment->id);
+        return $user->hasPermissionTo('handle comments') || ($user->hasPermissionTo('update comments') && $user->id === $comment->user_id);
     }
 
     /**
@@ -44,7 +44,7 @@ class CommentPolicy
      */
     public function delete(User $user, Comment $comment): bool
     {
-        return $user->hasPermissionTo('handle comments') || ($user->hasPermissionTo('delete comments') && $user->id === $comment->id);
+        return $user->hasPermissionTo('handle comments') || ($user->hasPermissionTo('delete comments') && $user->id === $comment->user_id);
     }
 
     /**

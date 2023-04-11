@@ -19,9 +19,9 @@ class CommentController extends Controller
     {
         $this->authorize('view-any', Comment::class);
 
-        $validated = $request->validated();
+        $comments = Comment::latest()
+            ->paginate($request->input('limit', 5));
 
-        $comments = Comment::create($validated);
 
         return new CommentCollection($comments);
     }

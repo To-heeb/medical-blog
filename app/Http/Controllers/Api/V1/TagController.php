@@ -22,7 +22,6 @@ class TagController extends Controller
         $search = $request->get('search', '');
 
         $tags = Tag::search($search)
-            ->withCount('answers', 'likes')
             ->latest()
             ->paginate($request->input('limit', 5));
 

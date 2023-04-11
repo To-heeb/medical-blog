@@ -21,7 +21,7 @@ class QuestionPolicy
      */
     public function view(User $user, Question $question): bool
     {
-        return $user->hasAnyPermission(['handle questions', 'view questions']) ||  $user->id === $question->id;
+        return $user->hasAnyPermission(['handle questions', 'view questions']) ||  $user->id === $question->user_id;
     }
 
     /**
@@ -37,7 +37,7 @@ class QuestionPolicy
      */
     public function update(User $user, Question $question): bool
     {
-        return $user->hasPermissionTo('handle questions') || ($user->hasPermissionTo('update questions') && $user->id === $question->id);
+        return $user->hasPermissionTo('handle questions') || ($user->hasPermissionTo('update questions') && $user->id === $question->user_id);
     }
 
     /**
@@ -45,7 +45,7 @@ class QuestionPolicy
      */
     public function delete(User $user, Question $question): bool
     {
-        return $user->hasPermissionTo('handle questions') || ($user->hasPermissionTo('delete questions') && $user->id === $question->id);
+        return $user->hasPermissionTo('handle questions') || ($user->hasPermissionTo('delete questions') && $user->id === $question->user_id);
     }
 
     /**

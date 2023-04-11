@@ -21,7 +21,7 @@ class AnswerPolicy
      */
     public function view(User $user, Answer $answer): bool
     {
-        return $user->hasAnyPermission(['handle answers', 'view answers']) ||  $user->id === $answer->id;
+        return $user->hasAnyPermission(['handle answers', 'view answers']) ||  $user->id === $answer->user_id;
     }
 
     /**
@@ -37,7 +37,7 @@ class AnswerPolicy
      */
     public function update(User $user, Answer $answer): bool
     {
-        return $user->hasPermissionTo('handle answers') || ($user->hasPermissionTo('update answers') && $user->id === $answer->id);
+        return $user->hasPermissionTo('handle answers') || ($user->hasPermissionTo('update answers') && $user->id === $answer->user_id);
     }
 
     /**
@@ -45,7 +45,7 @@ class AnswerPolicy
      */
     public function delete(User $user, Answer $answer): bool
     {
-        return $user->hasPermissionTo('handle answers') || ($user->hasPermissionTo('update answers') && $user->id === $answer->id);
+        return $user->hasPermissionTo('handle answers') || ($user->hasPermissionTo('update answers') && $user->id === $answer->user_id);
     }
 
     /**

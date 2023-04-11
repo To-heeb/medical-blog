@@ -21,8 +21,7 @@ class AnswerController extends Controller
 
         $search = $request->get('search', '');
 
-        $answer = Answer::search($search)
-            ->latest()
+        $answer = Answer::latest()
             ->paginate($request->input('limit', 5));
 
         return new AnswerCollection($answer);

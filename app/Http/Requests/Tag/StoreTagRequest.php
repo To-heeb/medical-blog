@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Tag;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreTagRequest extends FormRequest
@@ -22,7 +23,7 @@ class StoreTagRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => ['required', Rule::unique('tags', 'name')],
         ];
     }
 }

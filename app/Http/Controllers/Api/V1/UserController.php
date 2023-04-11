@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Resources\UserCollection;
 use App\Http\Requests\User\StoreUserRequest;
 use App\Http\Requests\User\UpdateUserRequest;
@@ -39,6 +40,8 @@ class UserController extends Controller
 
         $user = User::create($validated);
 
+        $user->assignRole($request->role);
+
         return new UserResource($user);
     }
 
@@ -61,7 +64,24 @@ class UserController extends Controller
 
         $validated = $request->validated();
 
+        if (empty($validated['password'])) {
+            unset($validated['password']);
+        } else {
+            $validated['password'] = Hash::make($validated['password']);
+        }
+
+        if (empty($validated['role'])) {
+            unset($validated['role']);
+        } else {
+            $user->syncRoles([]);
+        }
+
         $user->update($validated);
+
+        if (isset($validated['role'])) {
+            $user->assignRole($request->role);
+        }
+
 
         return new UserResource($user);
     }

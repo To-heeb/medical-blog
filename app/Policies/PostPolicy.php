@@ -36,7 +36,7 @@ class PostPolicy
      */
     public function update(User $user, Post $post): bool
     {
-        return $user->hasPermissionTo('handle posts') || ($user->hasPermissionTo('update posts') && $user->id === $post->id);
+        return $user->hasPermissionTo('handle posts') || ($user->hasPermissionTo('update posts') && $user->id === $post->user_id);
     }
 
     /**
@@ -44,7 +44,7 @@ class PostPolicy
      */
     public function delete(User $user, Post $post): bool
     {
-        return $user->hasPermissionTo('handle posts') || ($user->hasPermissionTo('delete posts') && $user->id === $post->id);
+        return $user->hasPermissionTo('handle posts') || ($user->hasPermissionTo('delete posts') && $user->id === $post->user_id);
     }
 
     /**

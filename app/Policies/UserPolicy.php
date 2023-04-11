@@ -35,15 +35,15 @@ class UserPolicy
      */
     public function update(User $user, User $model): bool
     {
-        return $user->hasPermissionTo(['handle users', 'update users']) || $user->id == $model->id;
+        return $user->hasPermissionTo('handle users') || ($user->hasPermissionTo('update users') && $user->id === $model->id);
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, User $model): bool
+    public function delete(User $user, User $users): bool
     {
-        return $user->hasAnyPermission(['handle users', 'delete users']);
+        return $user->hasPermissionTo('handle users') || ($user->hasPermissionTo('update users') && $user->id === $users->id);
     }
 
     /**
