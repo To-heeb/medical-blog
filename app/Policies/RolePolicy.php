@@ -4,15 +4,17 @@ namespace App\Policies;
 
 use App\Models\User;
 use Spatie\Permission\Models\Role;
+use Illuminate\Auth\Access\HandlesAuthorization;
 
 class RolePolicy
 {
+    use HandlesAuthorization;
     /**
      * Determine whether the user can view any models.
      */
     public function viewAny(User $user): bool
     {
-        return $user->hasAnyPermission(['handle roles', 'view roles']);
+        return $user->hasAnyPermission(['handle tags', 'view roles']);
     }
 
     /**

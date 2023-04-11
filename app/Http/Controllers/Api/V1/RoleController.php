@@ -5,18 +5,23 @@ namespace App\Http\Controllers\Api\V1;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\RoleResource;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Role\StoreRoleRequest;
 use App\Http\Requests\Role\UpdateRoleRequest;
-use App\Http\Resources\RoleResource;
 
 class RoleController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $this->authorize('view-any', Role::class);
+        if (!Auth::user()->isSuperAdmin()) {
+            abort(403, 'Unauthorized');
+        }
+        #$this->authorize('view-any', Role::class);
 
         $roles = Role::whereNotIn('name', ['super-admin'])->get();
 
@@ -28,7 +33,10 @@ class RoleController extends Controller
      */
     public function store(StoreRoleRequest $request)
     {
-        $this->authorize('create', Role::class);
+        if (!Auth::user()->isSuperAdmin()) {
+            abort(403, 'Unauthorized');
+        }
+        #$this->authorize('create', Role::class);
 
         $validated = $request->validated();
 
@@ -42,7 +50,11 @@ class RoleController extends Controller
      */
     public function show(Role $role)
     {
-        $this->authorize('view', $role);
+        #$this->authorize('view', $role);
+        if (!Auth::user()->isSuperAdmin()) {
+            abort(403, 'Unauthorized');
+        }
+
 
         return new RoleResource($role);
     }
@@ -53,7 +65,11 @@ class RoleController extends Controller
      */
     public function update(UpdateRoleRequest $request, Role $role)
     {
-        $this->authorize('update', $role);
+        #$this->authorize('update', $role);
+        if (!Auth::user()->isSuperAdmin()) {
+            abort(403, 'Unauthorized');
+        }
+
 
         $validated = $request->validated();
 
@@ -67,7 +83,10 @@ class RoleController extends Controller
      */
     public function destroy(Role $role)
     {
-        $this->authorize('delete', $role);
+        #$this->authorize('delete', $role);
+        if (!Auth::user()->isSuperAdmin()) {
+            abort(403, 'Unauthorized');
+        }
 
         $role->delete();
 

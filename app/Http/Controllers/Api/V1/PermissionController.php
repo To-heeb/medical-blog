@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\V1;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Permission;
 use App\Http\Resources\PermissionResource;
 use App\Http\Resources\PermissionCollection;
@@ -19,7 +20,10 @@ class PermissionController extends Controller
      */
     public function index(Request $request)
     {
-        $this->authorize('view-any', Permission::class);
+        #$this->authorize('view-any', Permission::class);
+        if (!Auth::user()->isSuperAdmin()) {
+            abort(403, 'Unauthorized');
+        }
 
         $search = $request->get('search', '');
 
@@ -35,7 +39,10 @@ class PermissionController extends Controller
      */
     public function store(StorePermissionRequest $request)
     {
-        $this->authorize('create', Permission::class);
+        #$this->authorize('create', Permission::class);
+        if (!Auth::user()->isSuperAdmin()) {
+            abort(403, 'Unauthorized');
+        }
 
         $validated = $request->validated();
 
@@ -49,7 +56,10 @@ class PermissionController extends Controller
      */
     public function show(Permission $permission)
     {
-        $this->authorize('view', $permission);
+        #$this->authorize('view', $permission);
+        if (!Auth::user()->isSuperAdmin()) {
+            abort(403, 'Unauthorized');
+        }
 
         return new PermissionResource($permission);
     }
@@ -60,7 +70,10 @@ class PermissionController extends Controller
      */
     public function update(UpdatePermissionRequest $request, Permission $permission)
     {
-        $this->authorize('update', $permission);
+        #$this->authorize('update', $permission);
+        if (!Auth::user()->isSuperAdmin()) {
+            abort(403, 'Unauthorized');
+        }
 
         $validated = $request->validated();
 
@@ -74,7 +87,10 @@ class PermissionController extends Controller
      */
     public function destroy(Permission $permission)
     {
-        $this->authorize('delete', $permission);
+        #$this->authorize('delete', $permission);
+        if (!Auth::user()->isSuperAdmin()) {
+            abort(403, 'Unauthorized');
+        }
 
         $permission->delete();
 

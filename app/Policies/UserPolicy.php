@@ -43,6 +43,7 @@ class UserPolicy
      */
     public function delete(User $user, User $users): bool
     {
+
         return $user->hasPermissionTo('handle users') || ($user->hasPermissionTo('update users') && $user->id === $users->id);
     }
 
