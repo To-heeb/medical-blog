@@ -453,6 +453,30 @@ return [
             'group'        => 'Category',
         ],
 
+        // Likes
+        'handle likes' => [
+            'display_name' => 'Handle all likes',
+            'description'  => 'Can handle all likes',
+            'group'        => 'Like',
+        ],
+
+        'view likes' => [
+            'display_name' => 'View likes',
+            'description'  => 'Can view liked models',
+            'group'        => 'Like',
+        ],
+
+        'create likes' => [
+            'display_name' => 'Create likes',
+            'description'  => 'Can like model',
+            'group'        => 'Like',
+        ],
+
+        'delete likes' => [
+            'display_name' => 'Delete likes',
+            'description'  => 'Can unlike model',
+            'group'        => 'Like',
+        ],
 
         // Logs
         'manage logs' => [

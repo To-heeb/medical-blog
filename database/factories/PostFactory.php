@@ -27,6 +27,7 @@ class PostFactory extends Factory
             'category_id' => Category::factory(),
             'user_id' => User::factory(),
             'published' => true,
+            'published_at' => now()->format('Y-m-d H:i:S')
         ];
     }
 }

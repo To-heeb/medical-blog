@@ -2,38 +2,38 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Models\Post;
-use App\Models\Comment;
+use App\Models\Answer;
+use App\Models\Question;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Resources\CommentResource;
-use App\Http\Resources\CommentCollection;
+use App\Http\Resources\AnswerResource;
+use App\Http\Resources\AnswerCollection;
 
-class PostCommentController extends Controller
+class QuestionAnswerController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request, Post $post)
+    public function index(Request $request, Question $question)
     {
-        $this->authorize('view-any', Comment::class);
+        $this->authorize('view-any', Answer::class);
 
         $search = $request->get('search', '');
 
-        $comments = $post->comments()
+        $answers = $question->answers()
             ->latest()
             ->paginate($request->input('limit', 5));
 
-        return new CommentCollection($comments);
+        return new AnswerCollection($answers);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, Post $post)
+    public function store(Request $request, Question $question)
     {
-        $this->authorize('create', Comment::class);
+        $this->authorize('create', Answer::class);
 
         $request->request->add(['user_id' => Auth::user()->id]);
 
@@ -42,8 +42,8 @@ class PostCommentController extends Controller
             'user_id' => 'required|exists:users,id',
         ]);
 
-        $comment = $post->comment()->create($validated);
+        $answer = $question->answers()->create($validated);
 
-        return new CommentResource($comment);
+        return new AnswerResource($answer);
     }
 }

@@ -21,7 +21,7 @@ class AnswerFactory extends Factory
         return [
             'content' => $this->faker->paragraph(),
             'user_id' => User::factory(),
-            'question_id' => Question::factory()
+            'question_id' => Question::factory(),
         ];
     }
 }

@@ -8,9 +8,20 @@ use App\Http\Controllers\Api\V1\RoleController;
 use App\Http\Controllers\Api\V1\UserController;
 use App\Http\Controllers\Api\V1\AnswerController;
 use App\Http\Controllers\Api\V1\CommentController;
+use App\Http\Controllers\Api\V1\TagPostController;
 use App\Http\Controllers\Api\V1\CategoryController;
+use App\Http\Controllers\Api\V1\PostLikeController;
 use App\Http\Controllers\Api\V1\QuestionController;
+use App\Http\Controllers\Api\V1\UserLikeController;
+use App\Http\Controllers\Api\V1\UserPostController;
 use App\Http\Controllers\Api\V1\PermissionController;
+use App\Http\Controllers\Api\V1\UserAnswerController;
+use App\Http\Controllers\Api\V1\PostCommentController;
+use App\Http\Controllers\Api\V1\UserCommentController;
+use App\Http\Controllers\Api\V1\CategoryPostController;
+use App\Http\Controllers\Api\V1\QuestionLikeController;
+use App\Http\Controllers\Api\V1\UserQuestionController;
+use App\Http\Controllers\Api\V1\QuestionAnswerController;
 use App\Http\Controllers\Api\V1\RolePermissionController;
 use App\Http\Controllers\Api\V1\UserPermissionController;
 use App\Http\Controllers\Api\V1\Auth\NewPasswordController;
@@ -74,14 +85,52 @@ Route::group([
         Route::name('roles.')
             ->group(function () {
                 // Role Permissions
-                Route::apiResource('roles/{role}/permissions', RolePermissionController::class)->only('store', 'destroy');
+                Route::apiResource('roles/{role}/permissions', RolePermissionController::class)->except(['show', 'update']);
             });
 
         Route::name('users.')
             ->group(function () {
                 // User Permissions
-                Route::apiResource('users/{user}/permissions', UserPermissionController::class)->only('store', 'destroy');
+                Route::apiResource('users/{user}/permissions', UserPermissionController::class)->except(['show', 'update']);
+
+                // User Posts
+                Route::apiResource('users/{user}/posts', UserPostController::class)->only('store', 'index');
+
+                // User Questions
+                Route::apiResource('users/{user}/questions', UserQuestionController::class)->only(['index', 'store']);
+
+                // User Comments
+                Route::apiResource('users/{user}/comments', UserCommentController::class)->only('index');
+
+                // User Answers
+                Route::apiResource('users/{user}/answers', UserAnswerController::class)->only('index');
+
+                // User Likes
+                Route::apiResource('users/{user}/likes', UserLikeController::class)->only('index');
             });
+
+        Route::name('posts.')
+            ->group(function () {
+                // Post Comments
+                Route::apiResource('posts/{post}/comments', PostCommentController::class)->only('store', 'index');
+
+                // Post Likes
+                Route::apiResource('posts/{post}/likes', PostLikeController::class)->only(['store', 'index', 'destroy']);
+            });
+
+        Route::name('questions.')
+            ->group(function () {
+                // Post Comments
+                Route::apiResource('questions/{question}/answers', QuestionAnswerController::class)->only('store', 'index');
+
+                // Post Likes
+                Route::apiResource('questions/{question}/likes', QuestionLikeController::class)->only(['store', 'index', 'destroy']);
+            });
+
+
+        Route::apiResource('categories/{category}/posts', CategoryPostController::class);
+        Route::apiResource('tags/{tag}/posts', TagPostController::class);
+
 
         Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
     });

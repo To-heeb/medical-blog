@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Resources\UserCollection;
 use App\Http\Requests\User\StoreUserRequest;
@@ -40,7 +41,11 @@ class UserController extends Controller
 
         $user = User::create($validated);
 
-        $user->assignRole($request->role);
+        if (!Auth::user()->isSuperAdmin()) {
+            $user->assignRole($request->role);
+        } else {
+            $user->assignRole('user');
+        }
 
         return new UserResource($user);
     }
@@ -70,17 +75,24 @@ class UserController extends Controller
             $validated['password'] = Hash::make($validated['password']);
         }
 
-        if (empty($validated['role'])) {
-            unset($validated['role']);
+        if (!Auth::user()->isSuperAdmin()) {
+
+            if (empty($validated['role'])) {
+                unset($validated['role']);
+            } else {
+                $user->syncRoles([]);
+            }
+
+            $user->update($validated);
+
+            if (isset($validated['role'])) {
+                $user->assignRole($request->role);
+            }
         } else {
-            $user->syncRoles([]);
+
+            $user->update($validated);
         }
 
-        $user->update($validated);
-
-        if (isset($validated['role'])) {
-            $user->assignRole($request->role);
-        }
 
 
         return new UserResource($user);

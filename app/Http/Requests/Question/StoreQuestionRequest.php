@@ -46,7 +46,7 @@ class StoreQuestionRequest extends FormRequest
             'content' => 'required',
             'published_at' => 'required|date|date_format:Y-m-d H:i:s',
             'user_id' => 'required|exists:users,id',
-            'slug' => 'unique:questions,slug,',
+            'slug' => 'unique:questions,slug',
         ];
     }
 }
