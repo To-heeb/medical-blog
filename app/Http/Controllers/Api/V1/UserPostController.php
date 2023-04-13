@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\PostResource;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\PostCollection;
 
 class UserPostController extends Controller
@@ -35,15 +37,18 @@ class UserPostController extends Controller
     {
         $this->authorize('create', Post::class);
 
+        $request->request->add(['slug' => Str::slug($request->input('title'))]);
+
         $validated = $request->validate([
             'title' => 'required|unique:questions',
             'content' => 'required',
             'published_at' => 'required|date|date_format:Y-m-d H:i:s',
-            'slug' => 'unique:questions,slug',
+            'slug' => 'required|unique:questions,slug',
+            'category_id' =>  'required|exists:categories,id'
         ]);
 
-        $question = $user->posts()->create($validated);
+        $post = $user->posts()->create($validated);
 
-        return new PostResource($question);
+        return new PostResource($post);
     }
 }

@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\TagController;
+use App\Http\Controllers\Api\V1\LikeController;
 use App\Http\Controllers\Api\V1\PostController;
 use App\Http\Controllers\Api\V1\RoleController;
 use App\Http\Controllers\Api\V1\UserController;
@@ -82,6 +83,10 @@ Route::group([
             'permissions'   =>   PermissionController::class,
         ]);
 
+        Route::apiResource('likes', LikeController::class)->only(['store', 'destroy']);
+        Route::apiResource('categories/{category}/posts', CategoryPostController::class)->only('store', 'index');
+        Route::apiResource('tags/{tag}/posts', TagPostController::class);
+
         Route::name('roles.')
             ->group(function () {
                 // Role Permissions
@@ -126,11 +131,6 @@ Route::group([
                 // Post Likes
                 Route::apiResource('questions/{question}/likes', QuestionLikeController::class)->only(['store', 'index', 'destroy']);
             });
-
-
-        Route::apiResource('categories/{category}/posts', CategoryPostController::class);
-        Route::apiResource('tags/{tag}/posts', TagPostController::class);
-
 
         Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
     });

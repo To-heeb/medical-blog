@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Models\Like;
+use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\LikeResource;
 use App\Http\Requests\Like\StoreLikeRequest;
@@ -17,6 +18,11 @@ class LikeController extends Controller
      */
     public function store(StoreLikeRequest $request)
     {
+
+        #$this->authorize('create', Like::class);
+
+        $request->request->add(['likeable_type' => Str::upper("app\models\/$request->input('likeable_type')")]);
+
         $validated = $request->validated();
 
         $user = Like::create($validated);
@@ -30,6 +36,8 @@ class LikeController extends Controller
      */
     public function destroy(Like $like)
     {
+        #$this->authorize('delete', Like::class);
+
         $like->delete();
 
         return response()->noContent();

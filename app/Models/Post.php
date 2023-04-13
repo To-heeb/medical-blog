@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\Likeable;
 use App\Events\LikeUpdated;
 use Illuminate\Support\Str;
 use App\Models\Scopes\Searchable;
@@ -11,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class Post extends Model
 {
-    use HasFactory, Searchable;
+    use HasFactory, Searchable, Likeable;
 
 
     /**

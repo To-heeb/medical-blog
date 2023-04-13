@@ -7,6 +7,7 @@ use App\Models\Post;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\LikeCollection;
+use App\Http\Resources\LikeResource;
 
 class PostLikeController extends Controller
 {
@@ -29,16 +30,24 @@ class PostLikeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Post $post)
     {
-        //
+        //$this->authorize('create', Like::class); 
+
+        $like = $post->like();
+
+        return new LikeResource($like);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Post $post)
     {
-        //
+        //$this->authorize('delete', Like::class); 
+
+        $post->unlike();
+
+        return response()->noContent();
     }
 }

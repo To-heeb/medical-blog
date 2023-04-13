@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\Likeable;
 use App\Models\Scopes\Searchable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -9,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class Question extends Model
 {
-    use HasFactory, Searchable;
+    use HasFactory, Searchable, Likeable;
 
 
     /**
