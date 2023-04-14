@@ -35,6 +35,7 @@ class Post extends Model
         'content',
         'view_count',
         'published',
+        'published_at',
         'user_id',
         'category_id'
     ];

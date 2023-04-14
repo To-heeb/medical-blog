@@ -13,11 +13,13 @@ use App\Http\Controllers\Api\V1\TagPostController;
 use App\Http\Controllers\Api\V1\CategoryController;
 use App\Http\Controllers\Api\V1\PostLikeController;
 use App\Http\Controllers\Api\V1\QuestionController;
+use App\Http\Controllers\Api\V1\TaggableController;
 use App\Http\Controllers\Api\V1\UserLikeController;
 use App\Http\Controllers\Api\V1\UserPostController;
 use App\Http\Controllers\Api\V1\PermissionController;
 use App\Http\Controllers\Api\V1\UserAnswerController;
 use App\Http\Controllers\Api\V1\PostCommentController;
+use App\Http\Controllers\Api\V1\TagQuestionController;
 use App\Http\Controllers\Api\V1\UserCommentController;
 use App\Http\Controllers\Api\V1\CategoryPostController;
 use App\Http\Controllers\Api\V1\QuestionLikeController;
@@ -71,6 +73,8 @@ Route::group([
         'middleware' =>  ['auth:sanctum'],
     ], function () {
 
+        Route::get('/tag/{tag:name}', [TaggableController::class, 'index']);
+
         Route::apiResources([
             'users'         =>   UserController::class,
             'tags'          =>   TagController::class,
@@ -85,7 +89,8 @@ Route::group([
 
         Route::apiResource('likes', LikeController::class)->only(['store', 'destroy']);
         Route::apiResource('categories/{category}/posts', CategoryPostController::class)->only('store', 'index');
-        Route::apiResource('tags/{tag}/posts', TagPostController::class);
+        Route::apiResource('tags/{tag}/posts', TagPostController::class)->only('index');
+        Route::apiResource('tags/{tag}/questions', TagQuestionController::class)->only('index');
 
         Route::name('roles.')
             ->group(function () {
@@ -121,6 +126,9 @@ Route::group([
 
                 // Post Likes
                 Route::apiResource('posts/{post}/likes', PostLikeController::class)->only(['store', 'index', 'destroy']);
+
+                // Publish Posts
+                Route::apiResource('posts/{post}/publish', PostLikeController::class)->only('store', 'destroy');
             });
 
         Route::name('questions.')
@@ -130,6 +138,9 @@ Route::group([
 
                 // Post Likes
                 Route::apiResource('questions/{question}/likes', QuestionLikeController::class)->only(['store', 'index', 'destroy']);
+
+                // Publish Question
+                Route::apiResource('questions/{question}/publish', QuestionLikeController::class)->only('store', 'destroy');
             });
 
         Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');

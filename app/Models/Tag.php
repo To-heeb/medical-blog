@@ -30,6 +30,24 @@ class Tag extends Model
     ];
 
     /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
+    protected $hidden = [
+        'pivot',
+    ];
+
+
+    /**
+     * Get the route key for the model.
+     */
+    // public function getRouteKeyName(): string
+    // {
+    //     return 'name';
+    // }
+
+    /**
      * Get all of the posts that are assigned this tag.
      */
     public function posts(): MorphToMany

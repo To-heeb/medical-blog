@@ -3,28 +3,28 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Models\Tag;
-use App\Models\Post;
+use App\Models\Question;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\PostCollection;
+use App\Http\Resources\QuestionCollection;
 
-class TagPostController extends Controller
+class TagQuestionController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request, Tag $tag)
     {
-        $this->authorize('view-any', Post::class);
+        $this->authorize('view-any', Question::class);
 
         $search = $request->get('search', '');
 
-        $posts = $tag->posts()
+        $questions = $tag->questions()
             ->search($search)
-            ->withCount('comments', 'likes')
+            ->withCount('answers', 'likes')
             ->latest()
             ->paginate($request->input('limit', 5));
 
-        return new PostCollection($posts);
+        return new QuestionCollection($questions);
     }
 }

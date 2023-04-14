@@ -58,6 +58,15 @@ trait Searchable
 
 
     /**
+     * Scope a query to order posts by latest posted
+     */
+    public function scopePublished(Builder $query): Builder
+    {
+        return $query->where('published', true);
+    }
+
+
+    /**
      * Scope a query to only include posts posted last month.
      */
     public function scopeLastMonth(Builder $query, int $limit = 5): Builder
