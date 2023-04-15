@@ -29,6 +29,7 @@ class StorePostRequest extends FormRequest
 
         // $this->merge([
         //     'published_at' => Carbon::parse($this->input('published_at'))->timestamp
+        //     'published_at' => 'required|date|date_format:Y-m-d H:i:s',
         // ]);
 
         $this->merge([
@@ -47,7 +48,6 @@ class StorePostRequest extends FormRequest
             'title' => 'required|unique:posts',
             'content' => 'required',
             'category_id' =>  'required|exists:categories,id',
-            'published_at' => 'required|date|date_format:Y-m-d H:i:s',
             'user_id' => 'required|exists:users,id',
             'slug' => 'unique:posts,slug,',
         ];

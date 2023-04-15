@@ -27,6 +27,7 @@ class StoreQuestionRequest extends FormRequest
 
         // $this->merge([
         //     'published_at' => Carbon::parse($this->input('published_at'))->timestamp
+        //     'published_at' => 'required|date|date_format:Y-m-d H:i:s',
         // ]);
 
         $this->merge([
@@ -44,7 +45,6 @@ class StoreQuestionRequest extends FormRequest
         return [
             'title' => 'required|unique:questions',
             'content' => 'required',
-            'published_at' => 'required|date|date_format:Y-m-d H:i:s',
             'user_id' => 'required|exists:users,id',
             'slug' => 'unique:questions,slug',
         ];

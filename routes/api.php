@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\V1\LikeController;
 use App\Http\Controllers\Api\V1\PostController;
 use App\Http\Controllers\Api\V1\RoleController;
 use App\Http\Controllers\Api\V1\UserController;
+use App\Http\Controllers\PublishPostController;
 use App\Http\Controllers\Api\V1\AnswerController;
 use App\Http\Controllers\Api\V1\CommentController;
 use App\Http\Controllers\Api\V1\TagPostController;
@@ -16,6 +17,7 @@ use App\Http\Controllers\Api\V1\QuestionController;
 use App\Http\Controllers\Api\V1\TaggableController;
 use App\Http\Controllers\Api\V1\UserLikeController;
 use App\Http\Controllers\Api\V1\UserPostController;
+use App\Http\Controllers\PublishQuestionController;
 use App\Http\Controllers\Api\V1\PermissionController;
 use App\Http\Controllers\Api\V1\UserAnswerController;
 use App\Http\Controllers\Api\V1\PostCommentController;
@@ -128,7 +130,7 @@ Route::group([
                 Route::apiResource('posts/{post}/likes', PostLikeController::class)->only(['store', 'index', 'destroy']);
 
                 // Publish Posts
-                Route::apiResource('posts/{post}/publish', PostLikeController::class)->only('store', 'destroy');
+                Route::apiResource('posts/{post}/publish', PublishPostController::class)->only('store', 'destroy');
             });
 
         Route::name('questions.')
@@ -140,7 +142,7 @@ Route::group([
                 Route::apiResource('questions/{question}/likes', QuestionLikeController::class)->only(['store', 'index', 'destroy']);
 
                 // Publish Question
-                Route::apiResource('questions/{question}/publish', QuestionLikeController::class)->only('store', 'destroy');
+                Route::apiResource('questions/{question}/publish', PublishQuestionController::class)->only('store', 'destroy');
             });
 
         Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');

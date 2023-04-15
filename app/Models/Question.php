@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\Likeable;
+use App\Traits\Publishable;
 use App\Models\Scopes\Searchable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -10,7 +11,10 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class Question extends Model
 {
-    use HasFactory, Searchable, Likeable;
+    use HasFactory,
+        Searchable,
+        Publishable,
+        Likeable;
 
 
     /**

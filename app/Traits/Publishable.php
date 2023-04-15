@@ -30,7 +30,7 @@ trait Publishable
     /**
      * Check if the resource is puvlished or not
      */
-    public function published(): bool
+    public function isPublished(): bool
     {
         return $this->where('published', true);
     }
