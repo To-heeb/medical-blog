@@ -28,7 +28,7 @@ trait Publishable
     }
 
     /**
-     * Check if the resource is puvlished or not
+     * Check if the resource is published or not
      */
     public function isPublished(): bool
     {

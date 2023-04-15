@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\V1;
 
 use App\Models\Post;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Http\Resources\PostResource;
 
 class PublishPostController extends Controller

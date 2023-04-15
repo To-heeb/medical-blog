@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\V1;
 
 use App\Models\Question;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Http\Resources\QuestionResource;
 
 class PublishQuestionController extends Controller
