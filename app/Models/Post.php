@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Traits\Likeable;
-use App\Events\LikeUpdated;
+use App\Events\ModelViewed;
 use App\Traits\Publishable;
 use Illuminate\Support\Str;
 use App\Models\Scopes\Searchable;
@@ -18,15 +18,6 @@ class Post extends Model
         Publishable,
         Likeable;
 
-
-    /**
-     * The event map for the model.
-     *
-     * @var array
-     */
-    // protected $dispatchesEvents = [
-    //     'retrieved'   => LikeUpdated::class,
-    // ];
 
     /**
      * The attributes that are mass assignable.
@@ -60,6 +51,17 @@ class Post extends Model
         'slug',
         'content'
     ];
+
+    /**
+     * The event map for the model.
+     *
+     * @var array
+     */
+    protected $dispatchesEvents = [
+        'retrieved'   => ModelViewed::class,
+    ];
+
+
 
     /**
      * Get the post's category.

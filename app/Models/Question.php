@@ -54,9 +54,9 @@ class Question extends Model
      *
      * @var array
      */
-    // protected $dispatchesEvents = [
-    //     'retrieved'   => LikeUpdated::class,
-    // ];
+    protected $dispatchesEvents = [
+        'retrieved'   => ModelViewed::class,
+    ];
 
 
     /**

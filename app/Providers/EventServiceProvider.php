@@ -3,8 +3,10 @@
 namespace App\Providers;
 
 use App\Events\LikeUpdated;
+use App\Events\ModelViewed;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
+use App\Listeners\UpdateModelViewCount;
 use App\Listeners\UpdateModelLikesCount;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -22,6 +24,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         LikeUpdated::class => [
             UpdateModelLikesCount::class,
+        ],
+        ModelViewed::class => [
+            UpdateModelViewCount::class,
         ],
     ];
 
