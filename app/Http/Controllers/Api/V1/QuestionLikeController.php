@@ -16,7 +16,7 @@ class QuestionLikeController extends Controller
      */
     public function index(Request $request, Question $question)
     {
-        //$this->authorize('view-any', Like::class); 
+        $this->authorize('view-any', Like::class);
 
         $search = $request->get('search', '');
 
@@ -32,7 +32,7 @@ class QuestionLikeController extends Controller
      */
     public function store(Question $question)
     {
-        //$this->authorize('create', Like::class); 
+        $this->authorize('create', Like::class);
 
         $like = $question->like();
 

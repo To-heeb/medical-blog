@@ -19,7 +19,7 @@ class LikeController extends Controller
     public function store(StoreLikeRequest $request)
     {
 
-        #$this->authorize('create', Like::class);
+        $this->authorize('create', Like::class);
 
         $request->request->add(['likeable_type' => Str::upper("app\models\/$request->input('likeable_type')")]);
 
@@ -36,7 +36,7 @@ class LikeController extends Controller
      */
     public function destroy(Like $like)
     {
-        #$this->authorize('delete', Like::class);
+        $this->authorize('delete', Like::class);
 
         $like->delete();
 
