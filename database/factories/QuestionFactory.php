@@ -26,7 +26,7 @@ class QuestionFactory extends Factory
             'content' => fake()->paragraph(5),
             'user_id' => User::factory(),
             'published' => true,
-            'published_at' => now()->format('Y-m-d H:i:S')
+            'published_at' => now()->format('Y-m-d H:i:s')
         ];
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Models\Question;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\QuestionResource;
 
@@ -11,11 +12,17 @@ class PublishQuestionController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Question $question)
+    public function store(Request $request)
     {
         $this->authorize('create', Question::class);
 
-        $question = $question->publish();
+        $request->validate([
+            'question_id' => 'required|exists:questions,id',
+        ]);
+
+        $question = Question::findOrFail($request->input('question_id'));
+
+        $question->publish();
 
         return new QuestionResource($question);
     }
@@ -25,10 +32,10 @@ class PublishQuestionController extends Controller
      */
     public function destroy(Question $question)
     {
-        $this->authorize('delete', Question::class);
+        $this->authorize('delete', $question);
 
         $question->unpublish();
 
-        return response()->noContent();
+        return new QuestionResource($question);
     }
 }

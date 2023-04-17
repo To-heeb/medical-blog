@@ -130,7 +130,8 @@ Route::group([
                 Route::apiResource('posts/{post}/likes', PostLikeController::class)->only(['store', 'index', 'destroy']);
 
                 // Publish Posts
-                Route::apiResource('posts/{post}/publish', PublishPostController::class)->only('store', 'destroy');
+                Route::post('publish-post', [PublishPostController::class, 'store'])->name('publish');
+                Route::delete('publish-post/{post}', [PublishPostController::class, 'destroy'])->name('unpublish');
             });
 
         Route::name('questions.')
@@ -142,7 +143,8 @@ Route::group([
                 Route::apiResource('questions/{question}/likes', QuestionLikeController::class)->only(['store', 'index', 'destroy']);
 
                 // Publish Question
-                Route::apiResource('questions/{question}/publish', PublishQuestionController::class)->only('store', 'destroy');
+                Route::post('publish-question', [PublishQuestionController::class, 'store'])->name('publish');
+                Route::delete('publish-question/{question}', [PublishQuestionController::class, 'destroy'])->name('unpublish');
             });
 
         Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');

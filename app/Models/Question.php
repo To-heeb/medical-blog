@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\Likeable;
+use App\Events\ModelViewed;
 use App\Traits\Publishable;
 use App\Models\Scopes\Searchable;
 use Illuminate\Database\Eloquent\Model;
