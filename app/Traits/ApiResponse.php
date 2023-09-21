@@ -14,7 +14,7 @@ trait ApiResponse
      * @param $message
      * @return \Illuminate\Http\JsonResponse
      */
-    function success($data, $statusCode = Response::HTTP_OK, $message)
+    function success($data, $statusCode = Response::HTTP_OK, $message = "")
     {
         return response()->json([
             "data" => $data,
@@ -31,7 +31,7 @@ trait ApiResponse
      * @return \Illuminate\Http\JsonResponse
      */
 
-    function successWithoutData($statusCode = Response::HTTP_NO_CONTENT, $message)
+    function successWithoutData($statusCode = Response::HTTP_NO_CONTENT, $message = "")
     {
         return response()->json([
             "status" => true,

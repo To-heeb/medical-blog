@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Models\Post;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\PostResource;
 
@@ -12,15 +11,15 @@ class PublishPostController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Post $post)
     {
-        $this->authorize('create', Post::class);
+        $this->authorize('create', $post);
 
-        $request->validate([
-            'post_id' => 'required|exists:posts,id',
-        ]);
+        // $request->validate([
+        //     'post_id' => 'required|exists:posts,id',
+        // ]);
 
-        $post = Post::findOrFail($request->input('post_id'));
+        // $post = Post::findOrFail($request->input('post_id'));
 
         $post->publish();
 

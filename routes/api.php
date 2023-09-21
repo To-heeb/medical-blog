@@ -129,22 +129,24 @@ Route::group([
                 // Post Likes
                 Route::apiResource('posts/{post}/likes', PostLikeController::class)->only(['store', 'index', 'destroy']);
 
-                // Publish Posts
-                Route::post('publish-post', [PublishPostController::class, 'store'])->name('publish');
-                Route::delete('publish-post/{post}', [PublishPostController::class, 'destroy'])->name('unpublish');
+                // Publish Post
+                Route::post('posts/{post}/publish', [PublishPostController::class, 'store'])->name('publish');
+
+                // Unpublish Post
+                Route::delete('posts/{post}/unpublish', [PublishPostController::class, 'destroy'])->name('unpublish');
             });
 
         Route::name('questions.')
             ->group(function () {
-                // Post Comments
+                // Quesiton Comments
                 Route::apiResource('questions/{question}/answers', QuestionAnswerController::class)->only('store', 'index');
 
-                // Post Likes
+                // Question Likes
                 Route::apiResource('questions/{question}/likes', QuestionLikeController::class)->only(['store', 'index', 'destroy']);
 
                 // Publish Question
-                Route::post('publish-question', [PublishQuestionController::class, 'store'])->name('publish');
-                Route::delete('publish-question/{question}', [PublishQuestionController::class, 'destroy'])->name('unpublish');
+                Route::post('questions/{question}/publish', [PublishQuestionController::class, 'store'])->name('publish');
+                Route::delete('questions/{question}/unpublish', [PublishQuestionController::class, 'destroy'])->name('unpublish');
             });
 
         Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');

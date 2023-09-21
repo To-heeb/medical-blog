@@ -29,7 +29,8 @@ class Question extends Model
         'content',
         'view_count',
         'published',
-        'user_id',
+        "published_at",
+        'user_id'
     ];
 
     protected $with = [
