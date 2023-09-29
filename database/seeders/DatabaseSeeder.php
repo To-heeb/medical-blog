@@ -36,5 +36,14 @@ class DatabaseSeeder extends Seeder
             'email' => 'toheeb@admin.com',
             'password' => Hash::make('admin'),
         ])->assignRole('super-admin');
+
+
+        \App\Models\User::factory()->create([
+            'name' => 'Toheeb Oyekola',
+            'first_name' => 'Toheeb',
+            'last_name' => 'Oyekola',
+            'email' => 'toheeb.olawale.to23@gmail',
+            'password' => Hash::make('admin'),
+        ])->assignRole('user');
     }
 }

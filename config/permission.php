@@ -171,7 +171,7 @@ return [
         'handle users' => [
             'display_name' => 'Handle all users',
             'description'  => 'Can handle all users',
-            'group'        => 'Answer',
+            'group'        => 'User',
         ],
 
         'view users' => [
@@ -202,7 +202,7 @@ return [
         'handle roles' => [
             'display_name' => 'Handle all roles',
             'description'  => 'Can handle all roles',
-            'group'        => 'Answer',
+            'group'        => 'Role',
         ],
 
         'view roles' => [
@@ -233,7 +233,7 @@ return [
         'handle permissions' => [
             'display_name' => 'Handle all permissions',
             'description'  => 'Can handle all permissions',
-            'group'        => 'Answer',
+            'group'        => 'Permission',
         ],
 
         'view permissions' => [
@@ -301,7 +301,7 @@ return [
         'handle posts' => [
             'display_name' => 'Handle all posts',
             'description'  => 'Can handle all posts',
-            'group'        => 'Answer',
+            'group'        => 'Post',
         ],
 
         'view posts' => [
@@ -332,7 +332,7 @@ return [
         'handle questions' => [
             'display_name' => 'Handle all questions',
             'description'  => 'Can handle all questions',
-            'group'        => 'Answer',
+            'group'        => 'Question',
         ],
 
         'view questions' => [
@@ -364,7 +364,7 @@ return [
         'handle comments' => [
             'display_name' => 'Handle all comments',
             'description'  => 'Can handle all comments',
-            'group'        => 'Answer',
+            'group'        => 'Comment',
         ],
 
         'view comments' => [
@@ -395,7 +395,7 @@ return [
         'handle tags' => [
             'display_name' => 'Handle all tags',
             'description'  => 'Can handle all tags',
-            'group'        => 'Answer',
+            'group'        => 'Tag',
         ],
 
         'view tags' => [
@@ -426,7 +426,7 @@ return [
         'handle categories' => [
             'display_name' => 'Handle all categories',
             'description'  => 'Can handle all categories',
-            'group'        => 'Answer',
+            'group'        => 'Category',
         ],
 
         'view categories' => [
