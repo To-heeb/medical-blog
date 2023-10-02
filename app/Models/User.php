@@ -49,7 +49,7 @@ class User extends Authenticatable
 
 
     /**
-     * 
+     *
      * The fields that are searchable.
      *
      */
