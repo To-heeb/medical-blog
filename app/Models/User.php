@@ -36,6 +36,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'roles'
     ];
 
     /**
@@ -58,10 +59,6 @@ class User extends Authenticatable
         'first_name',
         'last_name',
         'email'
-    ];
-
-    protected $with = [
-        'roles'
     ];
 
     /**
@@ -121,7 +118,6 @@ class User extends Authenticatable
     {
         return $this->hasRole('super-admin');
     }
-
 
     /**
      * The "booted" method of the model.

@@ -39,11 +39,11 @@ class DatabaseSeeder extends Seeder
 
 
         \App\Models\User::factory()->create([
-            'name' => 'Toheeb Oyekola',
-            'first_name' => 'Toheeb',
+            'name' => 'Haarith Oyekola',
+            'first_name' => 'Haarith',
             'last_name' => 'Oyekola',
-            'email' => 'toheeb.olawale.to23@gmail',
-            'password' => Hash::make('admin'),
+            'email' => 'haarith@gmail',
+            'password' => Hash::make('password'),
         ])->assignRole('user');
     }
 }

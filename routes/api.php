@@ -90,9 +90,6 @@ Route::group([
         ]);
 
         Route::apiResource('likes', LikeController::class)->only(['store', 'destroy']);
-        Route::apiResource('categories/{category}/posts', CategoryPostController::class)->only('store', 'index');
-        Route::apiResource('tags/{tag}/posts', TagPostController::class)->only('index');
-        Route::apiResource('tags/{tag}/questions', TagQuestionController::class)->only('index');
 
         Route::name('roles.')
             ->group(function () {
@@ -147,6 +144,23 @@ Route::group([
                 // Publish Question
                 Route::post('questions/{question}/publish', [PublishQuestionController::class, 'store'])->name('publish');
                 Route::delete('questions/{question}/unpublish', [PublishQuestionController::class, 'destroy'])->name('unpublish');
+            });
+
+
+        Route::name('tags.')
+            ->group(function () {
+
+                // Tag Posts
+                Route::apiResource('tags/{tag}/posts', TagPostController::class)->only('index');
+
+                // Tag Questions
+                Route::apiResource('tags/{tag}/questions', TagQuestionController::class)->only('index');
+            });
+
+        Route::name('category.')
+            ->group(function () {
+                // Role Permissions
+                Route::apiResource('categories/{category}/posts', CategoryPostController::class)->only('store', 'index');
             });
 
         Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
